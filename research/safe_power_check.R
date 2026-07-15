@@ -17,6 +17,15 @@
 out_dir <- file.path("research", "output")
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
+# Series-key structure (decoded from the 2026Q1 chart pack, see
+# research/output/README_safe_data.md):
+#   SAFE.H.U2.SME.A.0.0.0.Q9.FBLN.NN.AL.WP
+#   = FREQ.AREA.SIZE.(A).sector.age.ownership.ITEM.INSTRUMENT.RESPONSE.(AL).WP
+# The '0' slots are breakdown dimensions (0 = all firms); firm-age series
+# have non-zero codes there. Known instruments: FBLN bank loans, FOVD
+# overdrafts, FTCR trade credit; the equity code is identified below by
+# matching labels rather than hard-coding.
+
 # --- 1. Download the full SAFE aggregate dataset as CSV -------------------
 # The SDMX csvdata format includes one column per dimension, so we do not
 # need to hard-code the series-key structure.
